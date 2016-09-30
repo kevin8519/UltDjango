@@ -29,8 +29,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = secret_key
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
+DEBUG = False
+TEMPLATE_DEBUG = DEBUG
+DB_PASS = False
+if ENV_ROLE == 'development':
+    DEBUG = True
+    TEMPLATE_DEBUG = DEBUG
+    DB_PASS=CRMEASY_DB_PASS
 
 ALLOWED_HOSTS = []
 
@@ -44,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'marketing',
 ]
 
 MIDDLEWARE = [
@@ -61,7 +67,7 @@ ROOT_URLCONF = 'UltDjango.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -69,6 +75,11 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.core.context_processors.debug',
+                'django.core.context_processors.i18n',
+                'django.core.context_processors.media',
+                'django.core.context_processors.static',
+                'django.core.context_processors.tz',
             ],
         },
     },
@@ -85,7 +96,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres',
         'USER': 'postgres',
-        'PASSWORD':CRMEASY_DB_PASS,
+        'PASSWORD':DB_PASS,
         'HOST': 'localhost',
         'PORT': '5432',
     }
