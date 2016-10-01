@@ -37,7 +37,6 @@ if ENV_ROLE == 'development':
     TEMPLATE_DEBUG = DEBUG
     DB_PASS=CRMEASY_DB_PASS
 
-ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -134,6 +133,12 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
+if ENV_ROLE == 'production':
+    import dj_database_url
+    DATABASES['default'] =  dj_database_url.config()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    
+ALLOWED_HOSTS = ['*']
 
 STATIC_URL = '/static/'
 
