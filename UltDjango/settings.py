@@ -37,11 +37,37 @@ if ENV_ROLE == 'development':
     DEBUG = True
     TEMPLATE_DEBUG = DEBUG
     DB_PASS=CRMEASY_DB_PASS
+    DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD':DB_PASS,
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
+
+    
+    
 
 elif ENV_ROLE == 'production':
+    
     import dj_database_url
+    
     db_from_env=dj_database_url.config(conn_max_age=500)
     DATABASES['default'].update(db_from_env)
+    DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD':DB_PASS,
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
+
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     
     ALLOWED_HOSTS = ['*']
@@ -93,16 +119,6 @@ WSGI_APPLICATION = 'UltDjango.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD':DB_PASS,
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
 
 
 # Password validation
