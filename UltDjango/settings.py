@@ -11,9 +11,9 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+
 from secret import *
 
-from django.core.exceptions import ImproperlyConfigured
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -37,7 +37,13 @@ if ENV_ROLE == 'development':
     TEMPLATE_DEBUG = DEBUG
     DB_PASS=CRMEASY_DB_PASS
 
-
+elif ENV_ROLE == 'production':
+    import dj_database_url
+    db_from_env=dj_database_url.config(conn_max_age=500)
+    DATABASES['default'].update(db_from_env)
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    
+    ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -133,12 +139,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
-if ENV_ROLE == 'production':
-    import dj_database_url
-    DATABASES['default'] =  dj_database_url.config()
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    
-ALLOWED_HOSTS = ['*']
+
 
 STATIC_URL = '/static/'
 
@@ -149,5 +150,5 @@ STATICFILES_DIRS=[
      'var/www/static/' ,          
                   
                   ]
-
+STATIC_ROOT=os.path.join(BASE_DIR,"staticfiles")
 LOGIN_URL='login'

@@ -1,1 +1,1 @@
-web: gunicorn UltDjango.wsgi --log-file -
+web: gunicorn UltDjango.wsgi 
