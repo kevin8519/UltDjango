@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 import os
 
 from secret import *
+from django.conf.global_settings import STATICFILES_STORAGE
 
 
 
@@ -150,5 +151,8 @@ STATICFILES_DIRS=[
      'var/www/static/' ,          
                   
                   ]
-STATIC_ROOT=os.path.join(BASE_DIR,"staticfiles")
+STATIC_ROOT=os.path.join(BASE_DIR,'staticfiles')
+
+STATICFILES_STORAGE='whitenoise.django.GzipManifestStaticFilesStorage'
+
 LOGIN_URL='login'
