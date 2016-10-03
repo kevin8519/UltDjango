@@ -30,7 +30,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'pmusn$@_)@y8u3r43(%u7%qqqkkpq8ao7ssiwqy1)8r&l1$83('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 
     
@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'marketing',
+    'suscribers',
 ]
 
 MIDDLEWARE = [
@@ -91,15 +92,15 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-import dj_database_url
+#import dj_database_url
     
-db_from_env=dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
+#db_from_env=dj_database_url.config(conn_max_age=500)
+#DATABASES['default'].update(db_from_env)
 
 
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+#SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     
-ALLOWED_HOSTS = ['*']
+#ALLOWED_HOSTS = ['*']
 
 
 
