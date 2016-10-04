@@ -82,6 +82,7 @@ WSGI_APPLICATION = 'UltDjango.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
+Password=os.environ.get("Password")
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -155,3 +156,8 @@ STATIC_ROOT=os.path.join(BASE_DIR,'staticfiles')
 STATICFILES_STORAGE='whitenoise.django.GzipManifestStaticFilesStorage'
 
 LOGIN_URL='login'
+
+STRIPE_SECRET_KEY=STRIPE_SECRET_KEY
+STRIPE_PUBLISHABLE_KEY=STRIPE_PUBLISHABLE_KEY
+SUBSCRIPTION_PRICE = 1500
+
